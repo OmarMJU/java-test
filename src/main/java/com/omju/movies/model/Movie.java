@@ -16,4 +16,20 @@ public class Movie {
     public Movie(String name, int minutes, Genere genere) {
         this(null, name, minutes, genere);
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public Genere getGenere() {
+        return genere;
+    }
 }
