@@ -14,7 +14,14 @@ public class MovieService {
     }
 
     public Collection<Movie> findMoviesByGenere(Genere genere) {
-        Collection<Movie> allMovies = movieRepository.findAll().stream().filter(movie -> movie.getGenere() == genere).collect(Collectors.toList());
-        return  allMovies;
+        return this.allMovies().stream().filter(movie -> movie.getGenere() == genere).collect(Collectors.toList());
+    }
+
+    public Collection<Movie> findMoviesByLength(int length) {
+        return this.allMovies().stream().filter(movie -> movie.getMinutes() <= length).collect(Collectors.toList());
+    }
+
+    private Collection<Movie> allMovies() {
+        return movieRepository.findAll();
     }
 }

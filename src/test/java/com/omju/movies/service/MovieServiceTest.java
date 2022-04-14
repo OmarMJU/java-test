@@ -8,17 +8,19 @@ import java.util.Collection;
 import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.Arrays;
+import org.junit.Before;
 import java.util.List;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class MovieServiceTest {
+    private MovieService movieService;
 
-    @Test
-    public void returnMoviesByeGenere() {
+    @Before
+    public void setUp() {
         MovieRepositoryI movieRepositoryMock = Mockito.mock(MovieRepositoryI.class);
-        MovieService movieService = new MovieService(movieRepositoryMock);
+        movieService = new MovieService(movieRepositoryMock);
 
         List<Movie> movies = new ArrayList<>();
         movies.add(new Movie(1, "Dark Knight", 152, Genere.ACTION));
@@ -31,9 +33,21 @@ public class MovieServiceTest {
 
         // Create behavior to method findAll from MovieRepositoryI.
         Mockito.when(movieRepositoryMock.findAll()).thenReturn(movies);
+    }
 
+    @Test
+    public void returnMoviesByeGenere() {
         Collection<Movie> moviesByGenere = movieService.findMoviesByGenere(Genere.COMEDY);
-        List<Integer> moviesId = moviesByGenere.stream().map(movie -> movie.getId()).collect(Collectors.toList());
-        assertEquals(moviesId, Arrays.asList(3, 6));
+        assertEquals(Arrays.asList(3, 6), this.getMoviesIds(moviesByGenere));
+    }
+
+    @Test
+    public void returnMoviesByLength() {
+        Collection<Movie> moviesByLength = movieService.findMoviesByLength(119);
+        assertEquals(Arrays.asList(2, 3, 4, 5, 6, 7), this.getMoviesIds(moviesByLength));
+    }
+
+    private List<Integer> getMoviesIds(Collection<Movie> movies) {
+        return movies.stream().map(Movie::getId).collect(Collectors.toList());
     }
 }
