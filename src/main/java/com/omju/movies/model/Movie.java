@@ -6,17 +6,17 @@ public class Movie {
     private Integer id;
     private  String name;
     private int minutes;
-    private Genere genere;
+    private String genre;
 
-    public Movie(Integer id, String name, int minutes, Genere genere) {
+    public Movie(Integer id, String name, int minutes, String genre) {
         this.id = id;
         this.name = name;
         this.minutes = minutes;
-        this.genere = genere;
+        this.genre = genre;
     }
 
-    public Movie(String name, int minutes, Genere genere) {
-        this(null, name, minutes, genere);
+    public Movie(String name, int minutes, String genre) {
+        this(null, name, minutes, genre);
     }
 
     public Integer getId() {
@@ -31,8 +31,8 @@ public class Movie {
         return minutes;
     }
 
-    public Genere getGenere() {
-        return genere;
+    public String getGenre() {
+        return genre;
     }
 
     @Override
@@ -40,11 +40,21 @@ public class Movie {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Movie movie = (Movie) o;
-        return minutes == movie.minutes && Objects.equals(id, movie.id) && Objects.equals(name, movie.name) && genere == movie.genere;
+        return minutes == movie.minutes && Objects.equals(id, movie.id) && Objects.equals(name, movie.name) && Objects.equals(genre, movie.genre);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, minutes, genere);
+        return Objects.hash(id, name, minutes, genre);
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", minutes=" + minutes +
+                ", genere=" + genre +
+                '}';
     }
 }
