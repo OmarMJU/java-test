@@ -4,6 +4,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import com.omju.movies.model.ConstantsMovies;
 import org.junit.runners.MethodSorters;
 import com.omju.movies.model.Movie;
 import java.sql.SQLException;
@@ -36,13 +37,13 @@ public class MovieRepositoryIImplTest {
     @Before
     public void setUp() {
         moviesMock = new ArrayList<>();
-        moviesMock.add(new Movie(1, "Dark Knight", 152, "ACTION"));
-        moviesMock.add(new Movie(2, "Memento", 113, "THRILLER"));
-        moviesMock.add(new Movie(3, "Theres Something About Mary", 119, "COMEDY"));
-        moviesMock.add(new Movie(4, "Super 8", 112, "THRILLER"));
-        moviesMock.add(new Movie(5, "Scream", 111, "HORROR"));
-        moviesMock.add(new Movie(6, "Home Alon", 103, "COMEDY"));
-        moviesMock.add(new Movie(7, "Matrix", 112, "ACTION"));
+        moviesMock.add(new Movie(1, "Dark Knight", 152, ConstantsMovies.ACTION));
+        moviesMock.add(new Movie(2, "Memento", 113, ConstantsMovies.THRILLER));
+        moviesMock.add(new Movie(3, "Theres Something About Mary", 119, ConstantsMovies.COMEDY));
+        moviesMock.add(new Movie(4, "Super 8", 112, ConstantsMovies.THRILLER));
+        moviesMock.add(new Movie(5, "Scream", 111, ConstantsMovies.HORROR));
+        moviesMock.add(new Movie(6, "Home Alon", 103, ConstantsMovies.COMEDY));
+        moviesMock.add(new Movie(7, "Matrix", 112, ConstantsMovies.ACTION));
     }
 
     @Test
@@ -62,6 +63,13 @@ public class MovieRepositoryIImplTest {
         Movie movieExpected = new Movie("A Serbian Film", 105, "HORROR");
         movieRepositoryI.saveOrUpdate(movieExpected);
         assertEquals(movieExpected.getName(), movieRepositoryI.findById(8).getName());
+    }
+
+    @Test
+    public void loadMovieByName() {
+        String movieName = "Dark Knight";
+        Movie movieExpected = new Movie(1, movieName, 152, ConstantsMovies.ACTION);
+        assertEquals(movieExpected.getName(), movieRepositoryI.findByName(movieName).getName());
     }
 
     @AfterClass
