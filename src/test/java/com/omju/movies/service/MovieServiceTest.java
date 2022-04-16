@@ -1,6 +1,7 @@
 package com.omju.movies.service;
 
 import com.omju.movies.data.MovieRepositoryI;
+import com.omju.movies.model.ConstantsMovies;
 import com.omju.movies.model.Movie;
 import java.util.stream.Collectors;
 import java.util.Collection;
@@ -22,13 +23,13 @@ public class MovieServiceTest {
         movieService = new MovieService(movieRepositoryMock);
 
         List<Movie> movies = new ArrayList<>();
-        movies.add(new Movie(1, "Dark Knight", 152, "ACTION"));
-        movies.add(new Movie(2, "Memento", 113, "THRILLER"));
-        movies.add(new Movie(3, "There's Something About Mary", 119, "COMEDY"));
-        movies.add(new Movie(4, "Super 8", 112, "THRILLER"));
-        movies.add(new Movie(5, "Scream", 111, "HORROR"));
-        movies.add(new Movie(6, "Home Alon", 103, "COMEDY"));
-        movies.add(new Movie(7, "Matrix", 112, "ACTION"));
+        movies.add(new Movie(1, "Dark Knight", 152, ConstantsMovies.ACTION));
+        movies.add(new Movie(2, "Memento", 113, ConstantsMovies.THRILLER));
+        movies.add(new Movie(3, "There's Something About Mary", 119, ConstantsMovies.COMEDY));
+        movies.add(new Movie(4, "Super 8", 112, ConstantsMovies.THRILLER));
+        movies.add(new Movie(5, "Scream", 111, ConstantsMovies.HORROR));
+        movies.add(new Movie(6, "Home Alon", 103, ConstantsMovies.COMEDY));
+        movies.add(new Movie(7, "Matrix", 112, ConstantsMovies.ACTION));
 
         // Create behavior to method findAll from MovieRepositoryI.
         Mockito.when(movieRepositoryMock.findAll()).thenReturn(movies);
